@@ -14,9 +14,9 @@ def get_version(rel_path: str) -> str:
     raise RuntimeError("Unable to find version string.")
 
 setup(
-    name = "citros_data_analysis",
-    version=get_version("citros_data_analysis/__init__.py"),
-    author ="Chemel", 
+    name = "gal_orb",
+    version=get_version("gal_orb/__init__.py"),
+    author ="ChemelAA", 
     author_email="",
     license = "LICENSE.txt",
     description = "Orbit calculations",
