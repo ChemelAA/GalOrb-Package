@@ -5,7 +5,7 @@ from mpl_toolkits.mplot3d import Axes3D
 from astropy.io import ascii
 from astropy.table import Table
 
-def gal_orb(rh, lon, lat, vr, pml, pmb, t0, tf, M_disc = 100.0, M_sph = 30.0, name = None, reverse = False, plot = False,
+def gal_orb(rh, lon, lat, vr, pml, pmb, t0, tf, M_disc = 100.0, M_sph = 30.0, rtol=1e-12, atol=1e-12, name = None, reverse = False, plot = False,
             output = None):
     """
     Calculating the orbit of star or stellar cluster in the gravitational field of the Galaxy described 
@@ -33,6 +33,10 @@ def gal_orb(rh, lon, lat, vr, pml, pmb, t0, tf, M_disc = 100.0, M_sph = 30.0, na
         Mass of the disc, in Msun*10^9. By default, 10^11 Msun.
     M_sph : float, default 30
         Mass of the spherical component of the Galaxy, in Msun*10^9. By default, 3*10^10 Msun.
+    rtol : float, default 1e-12
+        Relative value of the error of the numerical integration scheme.
+    atol : float, default 1e-12
+        Absolute value  of the error of the numerical integration scheme.
     name : str, default None
         The name of the cluster.
         By default, name is assigned as "L{l}_B{b}_{direction}", where direction is "forw" or "backw", according to direction of time.
@@ -404,7 +408,7 @@ def gal_orb(rh, lon, lat, vr, pml, pmb, t0, tf, M_disc = 100.0, M_sph = 30.0, na
 
     y0 = [R, u, fi, v, z, w]
 
-    solution = ode(galorb).set_integrator('dopri5', rtol = 1e-12, atol = 1e-12, nsteps = 10000000)
+    solution = ode(galorb).set_integrator('dopri5', rtol = rtol, atol = atol, nsteps = 10000000)
     solution.set_initial_value(y0, float(t0))
     solution.set_solout(sol_f)
     Out = solution.integrate(float(tf))
