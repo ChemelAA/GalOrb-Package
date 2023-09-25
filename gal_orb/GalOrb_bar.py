@@ -406,7 +406,7 @@ def gal_orb(rh, lon, lat, vr, pml, pmb, t0, tf, M_disc = 100.0, M_sph = 30.0, rt
         w=-w
         OmegB=-OmegB
 
-    y0 = [R, u, fi, v, z, w]
+    y0 = np.array([R, u, fi, v, z, w], dtype = object)
 
     solution = ode(galorb).set_integrator('dopri5', rtol = rtol, atol = atol, nsteps = 10000000)
     solution.set_initial_value(y0, float(t0))

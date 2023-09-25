@@ -24,7 +24,7 @@ setup(
     packages=find_packages(),
     python_requires='<3.11',
     install_requires = [
-    "numpy<=1.21.2",
+    "numpy",
     "scipy",
     "pandas",
     "matplotlib",
